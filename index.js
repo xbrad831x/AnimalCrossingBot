@@ -49,6 +49,15 @@ client.on('message', (msg) => {
         }
     }
 
+    for(var i = 0; i < data.data.fossils.length; i++)
+    {
+        if(data.data.fossils[i].Name.toLocaleLowerCase() === filtered_msg)
+        {
+            msg.channel.send(`The price for ${data.data.fossils[i].Name} is ${data.data.fossils[i].Price} bells`);
+            return;
+        }
+    }
+
     msg.channel.send("No match found. Either the command is misspelled or does not exist.");
 });
 
