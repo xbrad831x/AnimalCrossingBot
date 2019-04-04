@@ -62,7 +62,7 @@ client.on('message', (msg) => {
             return;
         }
 
-        msg.channel.send(`${array[6]} turnips sells for ${Math.floor(result)} bells.`)
+        msg.channel.send(`${array[6]} turnips for ${array[3]} bells each, sells for ${Math.floor(result)} bells.`)
 
         return;
     }
