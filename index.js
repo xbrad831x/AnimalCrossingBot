@@ -66,6 +66,26 @@ client.on('message', (msg) => {
 
         return;
     }
+
+    if(filtered_msg.includes('fortune'))
+    {
+        arr = filtered_msg.split(" ");
+
+        if(arr[1] > 57 || isNaN(arr[1]))
+        {
+            msg.channel.send("Incorrect fortune number. Must be between 1 & 57.");
+            return;
+        }
+
+        for(var i = 0; i < data.data.fortunes.length; i++)
+        {
+            if(data.data.fortunes[i].Number.toLocaleLowerCase() === arr[1])
+            {
+                msg.channel.send(`A #${arr[1]} fortune give you a(n) ${data.data.fortunes[i].Name}.`);
+                return;
+            }
+        }
+    }
     
     for(var i = 0; i < data.data.bugs.length; i++)
     {
