@@ -7,7 +7,7 @@ client.on('message', (msg) => {
 
     if(msg.author.bot) return;
 
-    if(msg.content.indexOf(0) !== '!')
+    if(msg.content.charAt(0) !== '!')
     {
         return;
     }
