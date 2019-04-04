@@ -41,6 +41,31 @@ client.on('message', (msg) => {
 
         return;
     }
+
+    if(filtered_msg.includes('sell'))
+    {
+        array = filtered_msg.split(" ");
+
+        result = 0;
+
+        if(array.length != 7)
+        {
+            msg.channel.send("Incorrect usage of command.")
+            return;
+        }
+
+        result = array[6] * array[3];
+
+        if(Number.isNaN(result))
+        {
+            msg.channel.send("Bad number format. Please write the numbers like the following example: !buy set price 100 set bells 100")
+            return;
+        }
+
+        msg.channel.send(`${array[6]} turnips sells for ${Math.floor(result)} bells.`)
+
+        return;
+    }
     
     for(var i = 0; i < data.data.bugs.length; i++)
     {
