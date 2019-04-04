@@ -13,9 +13,34 @@ client.on('message', (msg) => {
     if(msg.author.bot) return;
 
     let bells;
-    filtered_msg = msg.content.toLocaleLowerCase().split('!').join('');
+    filtered_msg = msg.content.toLocaleLowerCase().split('!').join('').trim();
 
+    //!buy set price x set bells x
 
+    if(filtered_msg.includes('buy'))
+    {
+        array = filtered_msg.split(" ");
+
+        result = 0;
+
+        if(array.length != 7)
+        {
+            msg.channel.send("Incorrect usage of command.")
+            return;
+        }
+
+        result = array[6] / array[3];
+
+        if(Number.isNaN(result))
+        {
+            msg.channel.send("Bad number format. Please write the numbers like the following example: !buy set price 100 set bells 100")
+            return;
+        }
+
+        msg.channel.send(`You can buy ${Math.floor(result)} turnip(s).`)
+
+        return;
+    }
     
     for(var i = 0; i < data.data.bugs.length; i++)
     {
