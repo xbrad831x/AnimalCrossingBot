@@ -5,12 +5,12 @@ const client = new Discord.Client();
 
 client.on('message', (msg) => {
 
-    if(msg.author.bot) return;
-
     if(msg.content.charAt(0) !== '!')
     {
         return;
     }
+
+    if(msg.author.bot) return;
 
     let bells;
     filtered_msg = msg.content.toLocaleLowerCase().split('!').join('');
