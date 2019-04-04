@@ -7,6 +7,11 @@ client.on('message', (msg) => {
 
     if(msg.author.bot) return;
 
+    if(msg.content.indexOf(0) !== '!')
+    {
+        return;
+    }
+
     let bells;
     filtered_msg = msg.content.toLocaleLowerCase().split('!').join('');
 
