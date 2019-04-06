@@ -2006,6 +2006,7 @@ const data = {
         'Good Painting',
         'Jolly Painting',
         'Moody Painting',
+        'Motherly Statue',
         'Moving Painting',
         'Nice Painting',
         'Perfect Painting',
