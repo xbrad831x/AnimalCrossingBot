@@ -1854,7 +1854,7 @@ const data = {
         'Tiger Butterfly',
         'Monarch Butterfly',
         'Emperor Butterfly',
-        'Agrias Buttefly',
+        'Agrias Butterfly',
         'Raja Brooke Butterfly',
         'Birdwing Butterfly',
         'Moth',
