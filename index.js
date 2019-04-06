@@ -1,5 +1,14 @@
 const Discord = require('discord.js');
 let data = require('./data');
+const { Client } = require("pg");
+
+
+const conn = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
+})
+
+conn.connect();
 
 const client = new Discord.Client();
 
@@ -15,7 +24,94 @@ client.on('message', (msg) => {
     let bells;
     filtered_msg = msg.content.toLocaleLowerCase().split('!').join('').trim();
 
-    //!buy set price x set bells x
+    if(filtered_msg.includes('search'))
+    {
+        search = filtered_msg.split("search ");
+
+        if(search.length <= 1) 
+        {
+            msg.channel.send("No match found. Either the command is misspelled or does not exist.");
+            return;
+        }
+
+        item = search[1].trim();
+
+        id = msg.author.id;
+
+        for(var k = 0; k < data.data.donations.length; k++)
+        {
+            if(item.toLocaleLowerCase() == data.data.donations[k].toLocaleLowerCase())
+            {
+                search_query_text = "select * from users where id=$1 and item=$2"
+                value = [id, item]
+
+                conn.query(search_query_text, value)
+                .then(result => {
+                    if(result.rowCount == 0)
+                    {
+                        msg.channel.send(`${item} is not in your museum and can be donated.`);
+                    }
+                    else
+                    {
+                        msg.channel.send(`${item} is already in your museum.`);
+                    }
+                })
+                return;
+            }
+        }
+
+        msg.channel.send(`${item} is not a searchable item.`);
+        return;
+    }
+
+    if(filtered_msg.includes('add'))
+    {
+
+        add = filtered_msg.split("add ");
+
+        if(add.length <= 1) 
+        {
+            msg.channel.send("No match found. Either the command is misspelled or does not exist.");
+            return;
+        }
+
+        item = add[1].trim();
+
+        id = msg.author.id;
+
+            for(var j = 0; j < data.data.donations.length; j++)
+            {
+                if(item.toLocaleLowerCase() == data.data.donations[j].toLocaleLowerCase())
+                {
+                    check_query_text = 'select * from users where id=$1 and item=$2';
+                    insert_query = 'insert into users(id, item) values ($1, $2)';
+                    values = [id, item];
+
+                     conn.query(check_query_text, values)
+                    .then(result => {
+                        if(result.rowCount == 0)
+                        {
+                            conn.query(insert_query, values)
+                            .then(res => {
+                                    msg.channel.send(`Added ${values[1]} to the list.`);
+                            })
+                            .catch(e => console.error(e.stack));
+                        }
+                        else
+                        {
+                            msg.channel.send(`${values[1]} is already in the list.`);
+                        }
+                        
+                    })
+                    .catch(e => console.error(e.stack));
+                    return;
+                }
+            }
+
+            msg.channel.send(`${item} is not a donatable item.`)
+
+        return;
+    }
 
     if(filtered_msg.includes('buy'))
     {
@@ -81,7 +177,7 @@ client.on('message', (msg) => {
         {
             if(data.data.fortunes[i].Number.toLocaleLowerCase() === arr[1])
             {
-                msg.channel.send(`A #${arr[1]} fortune give you a(n) ${data.data.fortunes[i].Name}.`);
+                msg.channel.send(`A #${arr[1]} fortune gives you a(n) ${data.data.fortunes[i].Name}.`);
                 return;
             }
         }
