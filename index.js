@@ -252,18 +252,18 @@ client.on('message', (msg) => {
                 .then(result => {
                     if(result.rowCount == 0)
                     {
-                        msg.channel.send(`${mod} is not in your museum and can be donated.`);
+                        msg.channel.send(`**${mod}** is not in your museum and can be donated.`);
                     }
                     else
                     {
-                        msg.channel.send(`${mod} is already in your museum.`);
+                        msg.channel.send(`**${mod}** is already in your museum.`);
                     }
                 })
                 return;
             }
         }
 
-        msg.channel.send(`${mod} is not a searchable item.`);
+        msg.channel.send(`**${mod}** is not a searchable item.`);
         return;
     }
 
@@ -438,13 +438,13 @@ client.on('message', (msg) => {
                         {
                             conn.query(insert_query, values)
                             .then(res => {
-                                    msg.channel.send(`Added ${values[1]} to the list.`);
+                                    msg.channel.send(`Added **${values[1]}** to the list.`);
                             })
                             .catch(e => console.error(e.stack));
                         }
                         else
                         {
-                            msg.channel.send(`${values[1]} is already in the list.`);
+                            msg.channel.send(`**${values[1]}** is already in the list.`);
                         }
                         
                     })
@@ -453,7 +453,7 @@ client.on('message', (msg) => {
                 }
             }
 
-            msg.channel.send(`${mod} is not a donatable item.`)
+            msg.channel.send(`**${mod}** is not a donatable item.`)
 
         return;
     }
@@ -474,11 +474,11 @@ client.on('message', (msg) => {
 
         if(Number.isNaN(result))
         {
-            msg.channel.send("Bad number format. Please write the numbers like the following example: !buy set price 100 set bells 100")
+            msg.channel.send("Bad number format. Please write the numbers like the following example: **!buy set price 100 set bells 100**")
             return;
         }
 
-        msg.channel.send(`You can buy ${Math.floor(result)} turnip(s).`)
+        msg.channel.send(`You can buy **${Math.floor(result)}** turnip(s).`)
 
         return;
     }
@@ -499,11 +499,11 @@ client.on('message', (msg) => {
 
         if(Number.isNaN(result))
         {
-            msg.channel.send("Bad number format. Please write the numbers like the following example: !sell set price 100 set bells 100")
+            msg.channel.send("Bad number format. Please write the numbers like the following example: **!sell set price 100 set bells 100**")
             return;
         }
 
-        msg.channel.send(`${array[6]} turnips for ${array[3]} bells each, sells for ${Math.floor(result)} bells.`)
+        msg.channel.send(`**${array[6]}** turnips for **${array[3]}** bells each, sells for **${Math.floor(result)}** bells.`)
 
         return;
     }
@@ -522,7 +522,7 @@ client.on('message', (msg) => {
         {
             if(data.data.fortunes[i].Number.toLocaleLowerCase() === arr[1])
             {
-                msg.channel.send(`A #${arr[1]} fortune gives you a(n) ${data.data.fortunes[i].Name}.`);
+                msg.channel.send(`A **#${arr[1]}** fortune gives you a(n) **${data.data.fortunes[i].Name}**.`);
                 return;
             }
         }
@@ -532,7 +532,7 @@ client.on('message', (msg) => {
     {
         if(data.data.bugs[i].Name.toLocaleLowerCase() === filtered_msg)
         {
-            msg.channel.send(`The price for ${data.data.bugs[i].Name} is ${data.data.bugs[i].Price} bells`);
+            msg.channel.send(`The price for **${data.data.bugs[i].Name}** is **${data.data.bugs[i].Price}** bells`);
             return;
         }
     }
@@ -541,7 +541,7 @@ client.on('message', (msg) => {
     {
         if(data.data.fish[i].Name.toLocaleLowerCase() === filtered_msg)
         {
-            msg.channel.send(`The price for ${data.data.fish[i].Name} is ${data.data.fish[i].Price} bells`);
+            msg.channel.send(`The price for **${data.data.fish[i].Name}** is **${data.data.fish[i].Price}** bells`);
             return;
         }
     }
@@ -564,7 +564,7 @@ client.on('message', (msg) => {
     {
         if(data.data.fossils[i].Name.toLocaleLowerCase() === filtered_msg)
         {
-            msg.channel.send(`The price for ${data.data.fossils[i].Name} is ${data.data.fossils[i].Price} bells`);
+            msg.channel.send(`The price for **${data.data.fossils[i].Name}** is **${data.data.fossils[i].Price}** bells`);
             return;
         }
     }
