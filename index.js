@@ -36,31 +36,173 @@ client.on('message', (msg) => {
 
         item = search[1].trim();
 
+        switch(item.toLocaleLowerCase()) {
+            case 't.rex skull':
+                item = 'Tyrannosaurus Rex Skull';
+                break;
+            case 't.rex torso':
+                item = 'Tyrannosaurus Rex Torso';
+                break;
+            case 't.rex tail':
+                item = 'Tyrannosaurus Rex Tail';
+                break;
+            case 'tricera skull':
+                item = 'Triceratops Skull';
+                break;
+            case 'tricera torso':
+                item = 'Triceratops Torso';
+                break;
+            case 'tricera tail':
+                item = 'Triceratops Tail';
+                break;
+            case 'ankylo skull':
+                item = 'Anykylosaurus Skull';
+                break;
+            case 'ankylo torso':
+                item = 'Anykylosaurus Torso';
+                break;
+            case 'ankylo tail':
+                item = 'Anykylosaurus Tail';
+                break;
+            case 'apato skull':
+                item = 'Apatosaurus Skull';
+                break;
+            case 'apato torso':
+                item = 'Apatosaurus Torso';
+                break;
+            case 'sabertooth skull':
+                item = 'Sabretooth Tiger Skull';
+                break;
+            case 'sabertooth torso':
+                item = 'Sabretooth Tiger Torso';
+                break;
+            case 'pachy skull':
+                item = 'Pachysaurus Skull';
+                break;
+            case 'pachy torso':
+                item = 'Pachysaurus Torso';
+                break;
+            case 'pachy tail':
+                item = 'Pachysaurus Tail';
+                break;
+            case 'parasaur skull':
+                item = 'Parasaurus Skull';
+                break;
+            case 'parasaur torso':
+                item = 'Parasaurus Torso';
+                break;
+            case 'parasaur tail':
+                item = 'Parasaurus Tail';
+                break;
+            case 'diplo skull':
+                item = 'Diplodocus Skull';
+                break;
+            case 'diplo neck':
+                item = 'Diplodocus Neck';
+                break;
+            case 'diplo chest':
+                item = 'Diplodocus Chest';
+                break;
+            case 'diplo hip':
+                item = 'Diplodocus Hip';
+                break;
+            case 'diplo tail':
+                item = 'Diplodocus Tail';
+                break;
+            case 'plesio skull':
+                item = 'Pleiosaur Skull';
+                break;
+            case 'plesio torso':
+                item = 'Pleiosaur Torso';
+                break;
+            case 'plesio tail':
+                item = 'Pleiosaur Tail';
+                break;
+            case 'stego skull':
+                item = 'Stegosaurus Skull';
+                break;
+            case 'stego torso':
+                item = 'Stegosaurus Torso';
+                break;
+            case 'stego tail':
+                item = 'Stegosaurus Tail';
+                break;
+            case 'ptera left wing':
+                item = 'Pteranodon Left Wing';
+                break;
+            case 'ptera right wing':
+                item = 'Pteranodon Right Wing';
+                break;
+            case 'ptera skull':
+                item = 'Pteranodon Skull';
+                break;
+            case 'ichthyo skull':
+                item = 'Ichthyosaur Skull';
+                break;
+            case 'ichthyo torso':
+                item = 'Ichthyosaur Torso';
+                break;
+            case 'raptor skull':
+                item = 'Velociraptor Skull';
+                break;
+            case 'raptor torso':
+                item = 'Velociraptor Torso';
+                break;
+            case 'styraco skull':
+                item = 'Styracosaurus Skull';
+                break;
+            case 'styraco torso':
+                item = 'Styracosaurus Torso';
+                break;
+            case 'styraco tail':
+                item = 'Styracosaurus Tail';
+                break;
+            case 'spino skull':
+                item = 'Spinosaurus Skull';
+                break;
+            case 'spino torso':
+                item = 'Spinosaurus Torso';
+                break;
+            case 'spino tail':
+                item = 'Spinosaurus Tail';
+                break;
+            case 'megacero skull':
+                item = 'Megaceros Skull';
+                break;
+            case 'megacero torso':
+                item = 'Megaceros Torso';
+                break;
+            case 'megacero tail':
+                item = 'Megaceros Tail';
+                break;
+        }
+
         id = msg.author.id;
+        mod = item.toLocaleLowerCase();
 
         for(var k = 0; k < data.data.donations.length; k++)
         {
-            if(item.toLocaleLowerCase() == data.data.donations[k].toLocaleLowerCase())
+            if(mod.toLocaleLowerCase() == data.data.donations[k].toLocaleLowerCase())
             {
                 search_query_text = "select * from users where id=$1 and item=$2"
-                value = [id, item]
+                value = [id, mod]
 
                 conn.query(search_query_text, value)
                 .then(result => {
                     if(result.rowCount == 0)
                     {
-                        msg.channel.send(`${item} is not in your museum and can be donated.`);
+                        msg.channel.send(`${mod} is not in your museum and can be donated.`);
                     }
                     else
                     {
-                        msg.channel.send(`${item} is already in your museum.`);
+                        msg.channel.send(`${mod} is already in your museum.`);
                     }
                 })
                 return;
             }
         }
 
-        msg.channel.send(`${item} is not a searchable item.`);
+        msg.channel.send(`${mod} is not a searchable item.`);
         return;
     }
 
