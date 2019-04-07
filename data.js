@@ -1943,7 +1943,7 @@ const data = {
         'Diplodocus Hip',
         'Diplodocus Tail',
         'Fern Fossil',
-        'Ichthyosaur Skull',
+        'Ichthyosaur Skull',    
         'Ichthyosaur Torso',
         'Iquanodon Skull',
         'Iquanodon Chest',
