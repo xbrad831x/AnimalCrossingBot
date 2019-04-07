@@ -219,14 +219,15 @@ client.on('message', (msg) => {
         }
 
         id = msg.author.id;
+        mod = item.toLocaleLowerCase();
 
             for(var j = 0; j < data.data.donations.length; j++)
             {
-                if(item.toLocaleLowerCase() == data.data.donations[j].toLocaleLowerCase())
+                if(mod.toLocaleLowerCase() == data.data.donations[j].toLocaleLowerCase())
                 {
                     check_query_text = 'select * from users where id=$1 and item=$2';
                     insert_query = 'insert into users(id, item) values ($1, $2)';
-                    values = [id, item];
+                    values = [id, mod];
 
                      conn.query(check_query_text, values)
                     .then(result => {
@@ -249,7 +250,7 @@ client.on('message', (msg) => {
                 }
             }
 
-            msg.channel.send(`${item} is not a donatable item.`)
+            msg.channel.send(`${mod} is not a donatable item.`)
 
         return;
     }
