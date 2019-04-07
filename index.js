@@ -118,13 +118,13 @@ client.on('message', (msg) => {
                 item = 'Sabretooth Tiger Torso';
                 break;
             case 'pachy skull':
-                item = 'Sabretooth Tiger Skull';
+                item = 'Pachysaurus Skull';
                 break;
             case 'pachy torso':
-                item = 'Sabretooth Tiger Torso';
+                item = 'Pachysaurus Torso';
                 break;
             case 'pachy tail':
-                item = 'Sabretooth Tiger Tail';
+                item = 'Pachysaurus Tail';
                 break;
             case 'parasaur skull':
                 item = 'Parasaurus Skull';
