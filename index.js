@@ -36,7 +36,7 @@ client.on('message', (msg) => {
 
         commands = filtered_msg[1].trim();
 
-        msg.channel.send("The list of commands are !search, !add, !help, !buy, !sell, !fortune. \nUse !help <command name> to find out how to use the command.");
+        msg.channel.send("The list of commands are **!search, !add, !help, !buy, !sell, !fortune.** \nUse **!help <command name>** to find out how to use the command.");
 
         return;
     }
