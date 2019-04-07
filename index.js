@@ -24,6 +24,67 @@ client.on('message', (msg) => {
     let bells;
     filtered_msg = msg.content.toLocaleLowerCase().split('!').join('').trim();
 
+    if(filtered_msg.includes('commands'))
+    {
+        commands = filtered_msg.split(' ');
+
+        if(commands.length > 1) 
+        {
+            msg.channel.send("No match found. Either the command is misspelled or does not exist.");
+            return;
+        }
+
+        commands = filtered_msg[1].trim();
+
+        msg.channel.send("The list of commands are !search, !add, !help, !buy, !sell, !fortune. \nUse !help <command name> to find out how to use the command.");
+
+        return;
+    }
+
+    if(filtered_msg.includes('help'))
+    {
+        help_arr = filtered_msg.split(" ");
+        comm = ['add', 'buy', 'sell', 'fortune', 'search'];
+
+        if(help_arr.length <= 1) 
+        {
+            msg.channel.send("No match found. Either the command is misspelled or does not exist.");
+            return;
+        }
+
+        help = help_arr[1].trim();
+
+        for(var q = 0; q < comm.length; q++)
+        {
+            if(help.toLocaleLowerCase() ==  comm[q])
+            {
+                switch(help)
+                {
+                    case 'add':
+                        msg.channel.send("The add command is used to add items to your museum list. \n The format is **!add <item name>** \nHere is an example below:\n **!add dace**");
+                        break;
+                    case 'buy':
+                        msg.channel.send("The buy command is used to determine how many turnips you can buy with X amount of bells from Joan. \n The format is **!buy set price <price_of_turnips_from_joan> set bells <your_amount_of_bells>** (NO COMMAS IN NUMBERS) \n Here is an example below: \n !buy set price 95 set bells 100000 ");
+                        break;
+                    case 'sell':
+                        msg.channel.send("The sell command is used to determine how much bells you make selling turnips to reese. \n The format is **!sell set price <price_of_turnip_from_reese> set turnips <amount_of_turnips_you_have>** (NO COMMAS IN NUMBERS) \n Here is an example below: \n !sell set price 300 set turnips 4000");
+                        break;
+                    case 'fortune':
+                        msg.channel.send("The fortune command is used to find out which prizes certain fortune numbers give. \n The format is **!fortune <fortune_number>** \n Here is an example below: \n !fortune 35");
+                        break;
+                    case 'search':
+                        msg.channel.send("The search command is used to check your museum list to see if the item is donated or not. \n The format is **!search <name_of_item>** \n Here is an example below: \n !search amber");
+                        break;
+                }
+                return;
+            }
+        }
+
+        msg.channel.send(`${help} is not on the list of commands.`);
+        return;
+
+    }
+
     if(filtered_msg.includes('search'))
     {
         search = filtered_msg.split("search ");
@@ -438,7 +499,7 @@ client.on('message', (msg) => {
 
         if(Number.isNaN(result))
         {
-            msg.channel.send("Bad number format. Please write the numbers like the following example: !buy set price 100 set bells 100")
+            msg.channel.send("Bad number format. Please write the numbers like the following example: !sell set price 100 set bells 100")
             return;
         }
 
