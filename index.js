@@ -365,8 +365,8 @@ client.on('message', (msg) => {
             case 'plesio torso':
                 item = 'Pleiosaur Torso';
                 break;
-            case 'plesio tail':
-                item = 'Pleiosaur Tail';
+            case 'plesio neck':
+                item = 'Pleiosaur Neck';
                 break;
             case 'stego skull':
                 item = 'Stegosaurus Skull';
