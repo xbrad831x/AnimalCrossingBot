@@ -36,7 +36,7 @@ client.on('message', (msg) => {
 
         commands = filtered_msg[1].trim();
 
-        msg.channel.send("The list of commands are **!search, !add, !help, !buy, !sell, !fortune.** \nUse **!help <command name>** to find out how to use the command.");
+        msg.channel.send("The list of commands are **!search, !add, !help, !buy, !sell, !fortune, !item.** \nUse **!help <command name>** to find out how to use the command.");
 
         return;
     }
@@ -44,7 +44,7 @@ client.on('message', (msg) => {
     if(filtered_msg.includes('help'))
     {
         help_arr = filtered_msg.split(" ");
-        comm = ['add', 'buy', 'sell', 'fortune', 'search'];
+        comm = ['add', 'buy', 'sell', 'fortune', 'search', 'item'];
 
         if(help_arr.length <= 1) 
         {
@@ -74,6 +74,9 @@ client.on('message', (msg) => {
                         break;
                     case 'search':
                         msg.channel.send("The search command is used to check your museum list to see if the item is donated or not. \n The format is **!search <name_of_item>** \n Here is an example below: \n !search amber");
+                        break;
+                    case 'item':
+                        msg.channel.send("The item command is used to find out how much an item sells for. \n The format is **!item <item name>** \n Here is an example below: \n !item golden stag");
                         break;
                 }
                 return;
@@ -527,46 +530,62 @@ client.on('message', (msg) => {
             }
         }
     }
-    
-    for(var i = 0; i < data.data.bugs.length; i++)
-    {
-        if(data.data.bugs[i].Name.toLocaleLowerCase() === filtered_msg)
-        {
-            msg.channel.send(`The price for **${data.data.bugs[i].Name}** is **${data.data.bugs[i].Price}** bells`);
-            return;
-        }
-    }
 
-    for(var i = 0; i < data.data.fish.length; i++)
+    if(filtered_msg.includes('item'))
     {
-        if(data.data.fish[i].Name.toLocaleLowerCase() === filtered_msg)
-        {
-            msg.channel.send(`The price for **${data.data.fish[i].Name}** is **${data.data.fish[i].Price}** bells`);
-            return;
-        }
-    }
+        a = filtered_msg.split("item ");
 
-    for(var i = 0; i < data.data.arts.length; i++)
-    {
-        if(data.data.arts[i].Name.toLocaleLowerCase() === filtered_msg)
+        if(a.length <= 1) 
         {
-            let embed = new Discord.RichEmbed();
-            
-            embed.setTitle(data.data.arts[i].Name);
-            embed.setImage(data.data.arts[i].src);
-            embed.setDescription(data.data.arts[i].Description);
-            msg.channel.send(embed);
+            msg.channel.send("No match found. Either the command is misspelled or does not exist.");
             return;
         }
-    }
 
-    for(var i = 0; i < data.data.fossils.length; i++)
-    {
-        if(data.data.fossils[i].Name.toLocaleLowerCase() === filtered_msg)
+        m = a[1].trim();
+
+        console.log(m);
+
+        for(var i = 0; i < data.data.bugs.length; i++)
         {
-            msg.channel.send(`The price for **${data.data.fossils[i].Name}** is **${data.data.fossils[i].Price}** bells`);
-            return;
+            if(data.data.bugs[i].Name.toLocaleLowerCase() === m)
+            {
+                msg.channel.send(`The price for **${data.data.bugs[i].Name}** is **${data.data.bugs[i].Price}** bells`);
+                return;
+            }
         }
+
+        for(var i = 0; i < data.data.fish.length; i++)
+        {
+            if(data.data.fish[i].Name.toLocaleLowerCase() === m)
+            {
+                msg.channel.send(`The price for **${data.data.fish[i].Name}** is **${data.data.fish[i].Price}** bells`);
+                return;
+            }
+        }
+
+        for(var i = 0; i < data.data.arts.length; i++)
+        {
+            if(data.data.arts[i].Name.toLocaleLowerCase() === m)
+            {
+                let embed = new Discord.RichEmbed();
+                
+                embed.setTitle(data.data.arts[i].Name);
+                embed.setImage(data.data.arts[i].src);
+                embed.setDescription(data.data.arts[i].Description);
+                msg.channel.send(embed);
+                return;
+            }
+        }
+
+        for(var i = 0; i < data.data.fossils.length; i++)
+        {
+            if(data.data.fossils[i].Name.toLocaleLowerCase() === m)
+            {
+                msg.channel.send(`The price for **${data.data.fossils[i].Name}** is **${data.data.fossils[i].Price}** bells`);
+                return;
+            }
+        }
+
     }
 
     msg.channel.send("No match found. Either the command is misspelled or does not exist.");
