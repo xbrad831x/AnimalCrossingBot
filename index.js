@@ -36,7 +36,7 @@ client.on('message', (msg) => {
 
         commands = filtered_msg[1].trim();
 
-        msg.channel.send("The list of commands are **!search, !add, !help, !buy, !sell, !fortune, !item.** \nUse **!help <command name>** to find out how to use the command.");
+        msg.channel.send("The list of commands are **!search, !add, !help, !buy, !sell, !fortune, !item, !art.** \nUse **!help <command name>** to find out how to use the command.");
 
         return;
     }
@@ -44,7 +44,7 @@ client.on('message', (msg) => {
     if(filtered_msg.includes('help'))
     {
         help_arr = filtered_msg.split(" ");
-        comm = ['add', 'buy', 'sell', 'fortune', 'search', 'item'];
+        comm = ['add', 'buy', 'sell', 'fortune', 'search', 'item', 'art'];
 
         if(help_arr.length <= 1) 
         {
@@ -77,6 +77,9 @@ client.on('message', (msg) => {
                         break;
                     case 'item':
                         msg.channel.send("The item command is used to find out how much an item sells for. \n The format is **!item <item name>** \n Here is an example below: \n **!item golden stag**");
+                        break;
+                    case 'art':
+                        msg.channel.send("The art command is used to check if an art piece is real or fake. \n The format is **!art <art name>** \n Here is an example below: \n **!art graceful painting**");
                         break;
                 }
                 return;
@@ -531,6 +534,33 @@ client.on('message', (msg) => {
         }
     }
 
+    if(filtered_msg.includes('art'))
+    {
+        art = filtered_msg.split("art ");
+
+        if(art.length <= 1) 
+        {
+            msg.channel.send("No match found. Either the command is misspelled or does not exist.");
+            return;
+        }
+
+        art = art[1].trim();
+
+        for(var i = 0; i < data.data.arts.length; i++)
+        {
+            if(data.data.arts[i].Name.toLocaleLowerCase() === art)
+            {
+                let embed = new Discord.RichEmbed();
+                
+                embed.setTitle(data.data.arts[i].Name);
+                embed.setImage(data.data.arts[i].src);
+                embed.setDescription(data.data.arts[i].Description);
+                msg.channel.send(embed);
+                return;
+            }
+        }
+    }
+
     if(filtered_msg.includes('item'))
     {
         a = filtered_msg.split("item ");
@@ -559,20 +589,6 @@ client.on('message', (msg) => {
             if(data.data.fish[i].Name.toLocaleLowerCase() === m)
             {
                 msg.channel.send(`The price for **${data.data.fish[i].Name}** is **${data.data.fish[i].Price}** bells`);
-                return;
-            }
-        }
-
-        for(var i = 0; i < data.data.arts.length; i++)
-        {
-            if(data.data.arts[i].Name.toLocaleLowerCase() === m)
-            {
-                let embed = new Discord.RichEmbed();
-                
-                embed.setTitle(data.data.arts[i].Name);
-                embed.setImage(data.data.arts[i].src);
-                embed.setDescription(data.data.arts[i].Description);
-                msg.channel.send(embed);
                 return;
             }
         }
