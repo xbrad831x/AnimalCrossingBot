@@ -64,19 +64,19 @@ client.on('message', (msg) => {
                         msg.channel.send("The add command is used to add items to your museum list. \n The format is **!add <item name>** \nHere is an example below:\n **!add dace**");
                         break;
                     case 'buy':
-                        msg.channel.send("The buy command is used to determine how many turnips you can buy with X amount of bells from Joan. \n The format is **!buy set price <price_of_turnips_from_joan> set bells <your_amount_of_bells>** (NO COMMAS IN NUMBERS) \n Here is an example below: \n !buy set price 95 set bells 100000 ");
+                        msg.channel.send("The buy command is used to determine how many turnips you can buy with X amount of bells from Joan. \n The format is **!buy set price <price_of_turnips_from_joan> set bells <your_amount_of_bells>** (NO COMMAS IN NUMBERS) \n Here is an example below: \n **!buy set price 95 set bells 100000** ");
                         break;
                     case 'sell':
-                        msg.channel.send("The sell command is used to determine how much bells you make selling turnips to reese. \n The format is **!sell set price <price_of_turnip_from_reese> set turnips <amount_of_turnips_you_have>** (NO COMMAS IN NUMBERS) \n Here is an example below: \n !sell set price 300 set turnips 4000");
+                        msg.channel.send("The sell command is used to determine how much bells you make selling turnips to reese. \n The format is **!sell set price <price_of_turnip_from_reese> set turnips <amount_of_turnips_you_have>** (NO COMMAS IN NUMBERS) \n Here is an example below: \n **!sell set price 300 set turnips 4000**");
                         break;
                     case 'fortune':
-                        msg.channel.send("The fortune command is used to find out which prizes certain fortune numbers give. \n The format is **!fortune <fortune_number>** \n Here is an example below: \n !fortune 35");
+                        msg.channel.send("The fortune command is used to find out which prizes certain fortune numbers give. \n The format is **!fortune <fortune_number>** \n Here is an example below: \n **!fortune 35**");
                         break;
                     case 'search':
-                        msg.channel.send("The search command is used to check your museum list to see if the item is donated or not. \n The format is **!search <name_of_item>** \n Here is an example below: \n !search amber");
+                        msg.channel.send("The search command is used to check your museum list to see if the item is donated or not. \n The format is **!search <name_of_item>** \n Here is an example below: \n **!search amber**");
                         break;
                     case 'item':
-                        msg.channel.send("The item command is used to find out how much an item sells for. \n The format is **!item <item name>** \n Here is an example below: \n !item golden stag");
+                        msg.channel.send("The item command is used to find out how much an item sells for. \n The format is **!item <item name>** \n Here is an example below: \n **!item golden stag**");
                         break;
                 }
                 return;
