@@ -1992,6 +1992,7 @@ const data = {
         'Animal Statue',
         'Beautiful Statue',
         'Gallant Statue',
+        'Great Statue',
         'Mystic Statue',
         'Robust Statue',
         'Valiant Statue',
