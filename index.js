@@ -36,7 +36,7 @@ client.on('message', (msg) => {
 
         commands = filtered_msg[1].trim();
 
-        msg.channel.send("The list of commands are **!search, !add, !help, !buy, !sell, !fortune, !item, !art, !remove.** \nUse **!help <command name>** to find out how to use the command.");
+        msg.channel.send("The list of commands are **!search, !add, !help, !buy, !sell, !fortune, !item, !art, !remove, !list.** \nUse **!help <command name>** to find out how to use the command.");
 
         return;
     }
@@ -44,7 +44,7 @@ client.on('message', (msg) => {
     if(filtered_msg.includes('help'))
     {
         help_arr = filtered_msg.split(" ");
-        comm = ['add', 'buy', 'sell', 'fortune', 'search', 'item', 'art', 'remove'];
+        comm = ['add', 'buy', 'sell', 'fortune', 'search', 'item', 'art', 'remove', 'list'];
 
         if(help_arr.length <= 1) 
         {
@@ -84,6 +84,9 @@ client.on('message', (msg) => {
                     case 'remove':
                         msg.channel.send("The remove command is used to remove an item from your list. \n The format is **!remove <item_name>** \n Here is an example below: \n **!remove dace**");
                         break;
+                    case 'list':
+                        msg.channel.send("The list command is used to check the entire list you have added. There are 4 list names (fish, fossil, art, and bug). \n The format is **!list <list_name>** \n Here is an example below: \n **!list bug**");
+                        break;
                 }
                 return;
             }
@@ -92,6 +95,229 @@ client.on('message', (msg) => {
         msg.channel.send(`${help} is not on the list of commands.`);
         return;
 
+    }
+
+    if(filtered_msg.includes('list'))
+    {
+        l = filtered_msg.split("list ");
+
+        if(l.length <= 1)
+        {
+            msg.channel.send("No match found. Either the command is misspelled or does not exist.");
+            return;
+        }
+
+        mod_list = l[1].trim();
+        id = msg.author.id;
+
+        if(mod_list == "fish")
+        {
+            arr = [];
+            fish_arr = [];
+            final_arr = [];
+            text = "";
+            query_text = "select item from users where id=$1";
+            value = [id];
+            conn.query(query_text, value)
+            .then(res => {
+                for(var v = 0; v < res.rowCount; v++)
+                {
+                    arr.push(res.rows[v].item);
+                }
+
+                msg.channel.send("**FISH\n**");
+
+                outerloop:
+                for(var g = 0; g <= data.data.donations.indexOf("Giant Isopod"); g++)
+                {
+                    innerloop:
+                    for(var f = 0; f < arr.length; f++)
+                    {
+                        if(arr[f].toLocaleLowerCase() == data.data.donations[g].toLocaleLowerCase())
+                        {
+                            text = "~~" + data.data.donations[g].toLocaleLowerCase() + "~~"; 
+                            final_arr.push(text);
+                            continue outerloop;
+                        }
+                    }
+
+                    final_arr.push(data.data.donations[g].toLocaleLowerCase());
+                }
+
+                for(var i = 0; i <= final_arr.length; i+=3)
+                {
+                    if(i+2 < final_arr.length - 1)
+                    {
+                        msg.channel.send(final_arr[i] + "  |  " + final_arr[i+1] + "  |  " + final_arr[i+2] + "\n");
+                    }
+                    else if(i+1 < final_arr.length - 1)
+                    {
+                        msg.channel.send(final_arr[i] + "  |  " + final_arr[i+1] + "\n");
+                    }
+                    else
+                    {
+                        msg.channel.send(final_arr[final_arr.length - 1]);
+                    }
+                }
+            })
+            return;
+        }
+        else if(mod_list == "bug")
+        {
+            arr = [];
+            fish_arr = [];
+            final_arr = [];
+            text = "";
+            query_text = "select item from users where id=$1";
+            value = [id];
+            conn.query(query_text, value)
+            .then(res => {
+                for(var v = 0; v < res.rowCount; v++)
+                {
+                    arr.push(res.rows[v].item);
+                }
+
+                msg.channel.send("**BUG\n**");
+
+                outerloop:
+                for(var g = data.data.donations.indexOf("Giant Isopod") + 1; g <= data.data.donations.indexOf("Scorpion"); g++)
+                {
+                    innerloop:
+                    for(var f = 0; f < arr.length; f++)
+                    {
+                        if(arr[f].toLocaleLowerCase() == data.data.donations[g].toLocaleLowerCase())
+                        {
+                            text = "~~" + data.data.donations[g].toLocaleLowerCase() + "~~"; 
+                            final_arr.push(text);
+                            continue outerloop;
+                        }
+                    }
+
+                    final_arr.push(data.data.donations[g].toLocaleLowerCase());
+                }
+
+                for(var i = 0; i <= final_arr.length; i+=3)
+                {
+                    if(i+2 < final_arr.length - 1)
+                    {
+                        msg.channel.send(final_arr[i] + "  |  " + final_arr[i+1] + "  |  " + final_arr[i+2] + "\n");
+                    }
+                    else if(i+1 < final_arr.length - 1)
+                    {
+                        msg.channel.send(final_arr[i] + "  |  " + final_arr[i+1] + "\n");
+                    }
+                    else
+                    {
+                        msg.channel.send(final_arr[final_arr.length - 1]);
+                    }
+                }
+            })
+            return;
+        }
+        else if(mod_list == "fossil")
+        {
+            arr = [];
+            fish_arr = [];
+            final_arr = [];
+            text = "";
+            query_text = "select item from users where id=$1";
+            value = [id];
+            conn.query(query_text, value)
+            .then(res => {
+                for(var v = 0; v < res.rowCount; v++)
+                {
+                    arr.push(res.rows[v].item);
+                }
+
+                msg.channel.send("**FOSSIL\n**");
+
+                outerloop:
+                for(var g = data.data.donations.indexOf("Scorpion") + 1; g <= data.data.donations.indexOf("Velociraptor Torso"); g++)
+                {
+                    innerloop:
+                    for(var f = 0; f < arr.length; f++)
+                    {
+                        if(arr[f].toLocaleLowerCase() == data.data.donations[g].toLocaleLowerCase())
+                        {
+                            text = "~~" + data.data.donations[g].toLocaleLowerCase() + "~~"; 
+                            final_arr.push(text);
+                            continue outerloop;
+                        }
+                    }
+
+                    final_arr.push(data.data.donations[g].toLocaleLowerCase());
+                }
+
+                for(var i = 0; i <= final_arr.length; i+=3)
+                {
+                    if(i+2 < final_arr.length - 1)
+                    {
+                        msg.channel.send(final_arr[i] + "  |  " + final_arr[i+1] + "  |  " + final_arr[i+2] + "\n");
+                    }
+                    else if(i+1 < final_arr.length - 1)
+                    {
+                        msg.channel.send(final_arr[i] + "  |  " + final_arr[i+1] + "\n");
+                    }
+                    else
+                    {
+                        msg.channel.send(final_arr[final_arr.length - 1]);
+                    }
+                }
+            })
+            return;
+        }
+        else if(mod_list == "art")
+        {
+            arr = [];
+            fish_arr = [];
+            final_arr = [];
+            text = "";
+            query_text = "select item from users where id=$1";
+            value = [id];
+            conn.query(query_text, value)
+            .then(res => {
+                for(var v = 0; v < res.rowCount; v++)
+                {
+                    arr.push(res.rows[v].item);
+                }
+
+                msg.channel.send("**ART\n**");
+
+                outerloop:
+                for(var g = data.data.donations.indexOf("Velociraptor Torso") + 1; g <= data.data.donations.indexOf("Worthy Painting"); g++)
+                {
+                    innerloop:
+                    for(var f = 0; f < arr.length; f++)
+                    {
+                        if(arr[f].toLocaleLowerCase() == data.data.donations[g].toLocaleLowerCase())
+                        {
+                            text = "~~" + data.data.donations[g].toLocaleLowerCase() + "~~"; 
+                            final_arr.push(text);
+                            continue outerloop;
+                        }
+                    }
+
+                    final_arr.push(data.data.donations[g].toLocaleLowerCase());
+                }
+
+                for(var i = 0; i <= final_arr.length; i+=3)
+                {
+                    if(i+2 < final_arr.length - 1)
+                    {
+                        msg.channel.send(final_arr[i] + "  |  " + final_arr[i+1] + "  |  " + final_arr[i+2] + "\n");
+                    }
+                    else if(i+1 < final_arr.length - 1)
+                    {
+                        msg.channel.send(final_arr[i] + "  |  " + final_arr[i+1] + "\n");
+                    }
+                    else
+                    {
+                        msg.channel.send(final_arr[final_arr.length - 1]);
+                    }
+                }
+            })
+            return;
+        }
     }
 
     if(filtered_msg.includes('remove'))
