@@ -36,7 +36,7 @@ client.on('message', (msg) => {
 
         commands = filtered_msg[1].trim();
 
-        msg.channel.send("The list of commands are **!search, !add, !help, !buy, !sell, !fortune, !item, !art.** \nUse **!help <command name>** to find out how to use the command.");
+        msg.channel.send("The list of commands are **!search, !add, !help, !buy, !sell, !fortune, !item, !art, !remove.** \nUse **!help <command name>** to find out how to use the command.");
 
         return;
     }
@@ -44,7 +44,7 @@ client.on('message', (msg) => {
     if(filtered_msg.includes('help'))
     {
         help_arr = filtered_msg.split(" ");
-        comm = ['add', 'buy', 'sell', 'fortune', 'search', 'item', 'art'];
+        comm = ['add', 'buy', 'sell', 'fortune', 'search', 'item', 'art', 'remove'];
 
         if(help_arr.length <= 1) 
         {
@@ -81,6 +81,9 @@ client.on('message', (msg) => {
                     case 'art':
                         msg.channel.send("The art command is used to check if an art piece is real or fake. \n The format is **!art <art name>** \n Here is an example below: \n **!art graceful painting**");
                         break;
+                    case 'remove':
+                        msg.channel.send("The remove command is used to remove an item from your list. \n The format is **!remove <item_name>** \n Here is an example below: \n **!remove dace**");
+                        break;
                 }
                 return;
             }
@@ -89,6 +92,190 @@ client.on('message', (msg) => {
         msg.channel.send(`${help} is not on the list of commands.`);
         return;
 
+    }
+
+    if(filtered_msg.includes('remove'))
+    {
+        remove = filtered_msg.split("remove ");
+
+        if(remove.length <= 1)
+        {
+            msg.channel.send("No match found. Either the command is misspelled or does not exist.");
+            return;
+        }
+
+        rem = remove[1].trim();
+
+        switch(rem.toLocaleLowerCase()) {
+            case 't.rex skull':
+                rem = 'Tyrannosaurus Rex Skull';
+                break;
+            case 't.rex torso':
+                rem = 'Tyrannosaurus Rex Torso';
+                break;
+            case 't.rex tail':
+                rem = 'Tyrannosaurus Rex Tail';
+                break;
+            case 'tricera skull':
+                rem = 'Triceratops Skull';
+                break;
+            case 'tricera torso':
+                rem = 'Triceratops Torso';
+                break;
+            case 'tricera tail':
+                rem = 'Triceratops Tail';
+                break;
+            case 'ankylo skull':
+                rem = 'Anykylosaurus Skull';
+                break;
+            case 'ankylo torso':
+                rem = 'Anykylosaurus Torso';
+                break;
+            case 'ankylo tail':
+                rem = 'Anykylosaurus Tail';
+                break;
+            case 'apato skull':
+                rem = 'Apatosaurus Skull';
+                break;
+            case 'apato torso':
+                rem = 'Apatosaurus Torso';
+                break;
+            case 'sabertooth skull':
+                rem = 'Sabretooth Tiger Skull';
+                break;
+            case 'sabertooth torso':
+                rem = 'Sabretooth Tiger Torso';
+                break;
+            case 'pachy skull':
+                rem = 'Pachysaurus Skull';
+                break;
+            case 'pachy torso':
+                rem = 'Pachysaurus Torso';
+                break;
+            case 'pachy tail':
+                rem = 'Pachysaurus Tail';
+                break;
+            case 'parasaur skull':
+                rem = 'Parasaurus Skull';
+                break;
+            case 'parasaur torso':
+                rem = 'Parasaurus Torso';
+                break;
+            case 'parasaur tail':
+                rem = 'Parasaurus Tail';
+                break;
+            case 'diplo skull':
+                rem = 'Diplodocus Skull';
+                break;
+            case 'diplo neck':
+                rem = 'Diplodocus Neck';
+                break;
+            case 'diplo chest':
+                rem = 'Diplodocus Chest';
+                break;
+            case 'diplo hip':
+                rem = 'Diplodocus Hip';
+                break;
+            case 'diplo tail':
+                rem = 'Diplodocus Tail';
+                break;
+            case 'plesio skull':
+                rem = 'Pleiosaur Skull';
+                break;
+            case 'plesio torso':
+                rem = 'Pleiosaur Torso';
+                break;
+            case 'plesio tail':
+                rem = 'Pleiosaur Tail';
+                break;
+            case 'stego skull':
+                rem = 'Stegosaurus Skull';
+                break;
+            case 'stego torso':
+                rem = 'Stegosaurus Torso';
+                break;
+            case 'stego tail':
+                rem = 'Stegosaurus Tail';
+                break;
+            case 'ptera left wing':
+                rem = 'Pteranodon Left Wing';
+                break;
+            case 'ptera right wing':
+                rem = 'Pteranodon Right Wing';
+                break;
+            case 'ptera skull':
+                rem = 'Pteranodon Skull';
+                break;
+            case 'ichthyo skull':
+                rem = 'Ichthyosaur Skull';
+                break;
+            case 'ichthyo torso':
+                rem = 'Ichthyosaur Torso';
+                break;
+            case 'raptor skull':
+                rem = 'Velociraptor Skull';
+                break;
+            case 'raptor torso':
+                rem = 'Velociraptor Torso';
+                break;
+            case 'styraco skull':
+                rem = 'Styracosaurus Skull';
+                break;
+            case 'styraco torso':
+                rem = 'Styracosaurus Torso';
+                break;
+            case 'styraco tail':
+                rem = 'Styracosaurus Tail';
+                break;
+            case 'spino skull':
+                rem = 'Spinosaurus Skull';
+                break;
+            case 'spino torso':
+                rem = 'Spinosaurus Torso';
+                break;
+            case 'spino tail':
+                rem = 'Spinosaurus Tail';
+                break;
+            case 'megacero skull':
+                rem = 'Megaceros Skull';
+                break;
+            case 'megacero torso':
+                rem = 'Megaceros Torso';
+                break;
+            case 'megacero tail':
+                rem = 'Megaceros Tail';
+                break;
+        }
+
+        id = msg.author.id;
+        mod = rem.toLocaleLowerCase();
+
+        for(var k = 0; k < data.data.donations.length; k++)
+        {
+            if(mod.toLocaleLowerCase() == data.data.donations[k].toLocaleLowerCase())
+            {
+                search_query_text = "select * from users where id=$1 and item=$2";
+                remove_query_text = "delete from users where id=$1 and item=$2";
+                value = [id, mod];
+
+                conn.query(search_query_text, value)
+                .then(result => {
+                    if(result.rowCount == 0)
+                    {
+                        msg.channel.send(`**${mod}** is not in your list.`);
+                    }
+                    else
+                    {
+                        conn.query(remove_query_text, value)
+                        .then(r  => msg.channel.send(`**${mod}** was removed.`))
+                    }
+                })
+                return;
+            }
+        }
+
+        msg.channel.send(`**${mod}** is not a(n) removable item.`);
+        return;
     }
 
     if(filtered_msg.includes('search'))
