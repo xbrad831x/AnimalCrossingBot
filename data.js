@@ -1856,6 +1856,7 @@ const data = {
         'Agrias Butterfly',
         'Raja Brooke Butterfly',
         'Birdwing Butterfly',
+        'Peacock Butterfly',
         'Moth',
         'Oak Silk Moth',
         'Honeybee',
