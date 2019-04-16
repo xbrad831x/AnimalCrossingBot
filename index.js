@@ -734,7 +734,7 @@ client.on('message', (msg) => {
                 item = 'Apatosaurus Torso';
                 break;
             case 'apato tail':
-                item = 'Apatosaurus Torso';
+                item = 'Apatosaurus Tail';
                 break;
             case 'sabertooth skull':
                 item = 'Sabretooth Tiger Skull';
